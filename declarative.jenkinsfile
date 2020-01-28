@@ -24,15 +24,23 @@ pipeline {
                 sh '''
                     . /opt/conda/etc/profile.d/conda.sh
                     conda activate test_env
+                    echo $PATH
                 '''
-                echo "$PATH"
+
                 echo 'setup complete'
             }
         }
         stage('Test') {
             steps {
                 echo 'Testing..'
-                sh "pytest"
+                echo 'Activating conda environment..'
+                sh '''
+                    . /opt/conda/etc/profile.d/conda.sh
+                    conda activate test_env
+                    echo $PATH
+                    pytest
+                '''
+                echo 'test complete'
             }
         }
     }
