@@ -21,8 +21,10 @@ pipeline {
                 sh "echo `pwd`"
                 sh "echo `ls -l`"
                 echo 'Activating conda environment..'
-                sh ". /opt/conda/etc/profile.d/conda.sh"
-                sh "conda activate test_env"
+                sh '''
+                    . /opt/conda/etc/profile.d/conda.sh
+                    conda activate test_env
+                '''
                 echo "$PATH"
                 echo 'setup complete'
             }
